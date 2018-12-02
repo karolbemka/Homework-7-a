@@ -1,1 +1,1 @@
-# jjdd5-materialy-hibernate
+# hibernate-demo
