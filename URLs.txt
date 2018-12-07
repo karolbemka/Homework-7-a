@@ -14,3 +14,4 @@ http://localhost:8080/hibernate-demo/computer?action=delete&id=1
 http://localhost:8080/hibernate-demo/computer?action=update&id=4&name=Atari&os=ATARIOS
 
 Cwiczenie 5:
+http://localhost:8080/hibernate-demo/student?action=add&name=Tomasz&surname=Smith&date=1988-02-28&cid=3

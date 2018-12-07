@@ -34,19 +34,29 @@ public class StudentServlet extends HttpServlet {
         super.init(config);
 
         // Test data
-        // Students
-        studentDao.save(new Student("Michal",
-            "Malinowski",
-            LocalDate.of(2000, 2, 13)));
-        studentDao.save(new Student("Marek",
-            "Kowalski",
-            LocalDate.parse("2001-11-12")));
-
         // Computers
-        computerDao.save(new Computer("DELL Latitude 1234",
-            "Ubuntu"));
-        computerDao.save(new Computer("HP Pavillion 321",
-            "Windows 10"));
+        Computer c1 = new Computer("DELL Latitude 1234",
+            "Ubuntu");
+        c1.getId(); // tu id = null
+        computerDao.save(c1);
+        c1.getId(); // tu juz wartosc jest
+
+        Computer c2 = new Computer("HP Pavillion 321",
+            "Windows 10");
+        computerDao.save(c2);
+
+        // Students
+        Student student1 = new Student("Michal",
+            "Malinowski",
+            LocalDate.of(2000, 2, 13),
+            c1);
+        studentDao.save(student1);
+
+        Student student2 = new Student("Marek",
+            "Kowalski",
+            LocalDate.parse("2001-11-12"),
+            c2);
+        studentDao.save(student2);
 
         LOG.info("System time zone is: {}", ZoneId.systemDefault());
     }
@@ -109,6 +119,11 @@ public class StudentServlet extends HttpServlet {
         String dateStr = req.getParameter("date");
         LocalDate date = LocalDate.parse(dateStr); // YYYY-MM-DD
         p.setDateOfBirth(date);
+
+        String computerIdStr = req.getParameter("cid");
+        Long computerId = Long.valueOf(computerIdStr);
+        Computer c = computerDao.findById(computerId);
+        p.setComputer(c);
 
         studentDao.save(p);
         LOG.info("Saved a new Student object: {}", p);
