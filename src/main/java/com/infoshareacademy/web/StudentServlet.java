@@ -3,6 +3,7 @@ package com.infoshareacademy.web;
 import com.infoshareacademy.dao.StudentDao;
 import com.infoshareacademy.model.Student;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 import javax.inject.Inject;
@@ -29,8 +30,12 @@ public class StudentServlet extends HttpServlet {
 
         // Test data
         // Students
-        studentDao.save(new Student("Michal"));
-        studentDao.save(new Student("Marek"));
+        studentDao.save(new Student("Michal",
+            "Malinowski",
+            LocalDate.of(2000, 2, 13)));
+        studentDao.save(new Student("Marek",
+            "Kowalski",
+            LocalDate.parse("2001-11-12")));
 
         LOG.info("System time zone is: {}", ZoneId.systemDefault());
     }
@@ -69,6 +74,11 @@ public class StudentServlet extends HttpServlet {
             LOG.info("No Student found for id = {}, nothing to be updated", id);
         } else {
             existingStudent.setName(req.getParameter("name"));
+            existingStudent.setSurname(req.getParameter("surname"));
+
+            String dateStr = req.getParameter("date");
+            LocalDate date = LocalDate.parse(dateStr); // YYYY-MM-DD
+            existingStudent.setDateOfBirth(date);
 
             studentDao.update(existingStudent);
             LOG.info("Student object updated: {}", existingStudent);
@@ -83,6 +93,11 @@ public class StudentServlet extends HttpServlet {
 
         final Student p = new Student();
         p.setName(req.getParameter("name"));
+        p.setSurname(req.getParameter("surname"));
+
+        String dateStr = req.getParameter("date");
+        LocalDate date = LocalDate.parse(dateStr); // YYYY-MM-DD
+        p.setDateOfBirth(date);
 
         studentDao.save(p);
         LOG.info("Saved a new Student object: {}", p);
