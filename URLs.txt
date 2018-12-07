@@ -15,3 +15,7 @@ http://localhost:8080/hibernate-demo/computer?action=update&id=4&name=Atari&os=A
 
 Cwiczenie 5:
 http://localhost:8080/hibernate-demo/student?action=add&name=Tomasz&surname=Smith&date=1988-02-28&cid=3
+
+Cwiczenie 6:
+http://localhost:8080/hibernate-demo/address?action=findAll
+http://localhost:8080/hibernate-demo/address?action=add&city=Wejherowo&street=Prosta 12
