@@ -1,6 +1,8 @@
 package com.infoshareacademy.web;
 
+import com.infoshareacademy.dao.ComputerDao;
 import com.infoshareacademy.dao.StudentDao;
+import com.infoshareacademy.model.Computer;
 import com.infoshareacademy.model.Student;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -24,6 +26,9 @@ public class StudentServlet extends HttpServlet {
     @Inject
     private StudentDao studentDao;
 
+    @Inject
+    private ComputerDao computerDao;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -36,6 +41,12 @@ public class StudentServlet extends HttpServlet {
         studentDao.save(new Student("Marek",
             "Kowalski",
             LocalDate.parse("2001-11-12")));
+
+        // Computers
+        computerDao.save(new Computer("DELL Latitude 1234",
+            "Ubuntu"));
+        computerDao.save(new Computer("HP Pavillion 321",
+            "Windows 10"));
 
         LOG.info("System time zone is: {}", ZoneId.systemDefault());
     }

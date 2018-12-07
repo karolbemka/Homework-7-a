@@ -6,3 +6,11 @@ http://localhost:8080/hibernate-demo/student?action=delete&id=3
 
 Cwiczenie 3:
 http://localhost:8080/hibernate-demo/student?action=add&name=Tomasz&surname=Smith&date=1988-02-28
+
+Cwiczenie 4:
+http://localhost:8080/hibernate-demo/computer?action=findAll
+http://localhost:8080/hibernate-demo/computer?action=add&name=MacBook Air&os=os x
+http://localhost:8080/hibernate-demo/computer?action=delete&id=1
+http://localhost:8080/hibernate-demo/computer?action=update&id=4&name=Atari&os=ATARIOS
+
+Cwiczenie 5:
