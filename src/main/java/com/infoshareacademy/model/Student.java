@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -18,6 +20,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "STUDENTS")
+@NamedQueries({
+    @NamedQuery(
+        name = "Student.findBornAfter",
+        query = "SELECT s FROM Student s WHERE s.dateOfBirth >= :param1 ORDER BY s.dateOfBirth DESC"
+    )
+})
 public class Student {
 
     @Id

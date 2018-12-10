@@ -115,8 +115,20 @@ public class StudentServlet extends HttpServlet {
             deleteStudent(req, resp);
         } else if (action.equals("update")) {
             updateStudent(req, resp);
+        } else if (action.equals("findByDate")) {
+            findByDate(req, resp);
         } else {
             resp.getWriter().write("Unknown action.");
+        }
+    }
+
+    private void findByDate(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        LocalDate date = LocalDate.parse(req.getParameter("date"));
+
+        List<Student> result = studentDao.findAllBornAfter(date);
+
+        for (Student p : result) {
+            resp.getWriter().write(p.toString() + "\n");
         }
     }
 
