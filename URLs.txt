@@ -29,3 +29,4 @@ Cwiczenie 8:
 http://localhost:8080/hibernate-demo/course?action=findAll
 http://localhost:8080/hibernate-demo/course?action=add&course=JJDD8
 http://localhost:8080/hibernate-demo/course?action=delete&id=1
+http://localhost:8080/hibernate-demo/student?action=update&id=2&name=Tomasz&surname=Smith&date=1988-02-28&cid=2&aid=2&courseid=2

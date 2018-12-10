@@ -11,6 +11,7 @@ import com.infoshareacademy.model.Student;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletConfig;
@@ -80,14 +81,16 @@ public class StudentServlet extends HttpServlet {
             "Malinowski",
             LocalDate.of(2000, 2, 13),
             c1,
-            a1);
+            a1,
+            Arrays.asList(course1, course2));
         studentDao.save(student1);
 
         Student student2 = new Student("Marek",
             "Kowalski",
             LocalDate.parse("2001-11-12"),
             c2,
-            a1);
+            a1,
+            Arrays.asList(course3));
         studentDao.save(student2);
 
         LOG.info("System time zone is: {}", ZoneId.systemDefault());
@@ -138,6 +141,16 @@ public class StudentServlet extends HttpServlet {
             Address address = addressDao.findById(addressId);
             existingStudent.setAddress(address);
 
+            String courseIdStr = req.getParameter("courseid");
+            Long courseId = Long.valueOf(courseIdStr);
+            Course course = courseDao.findById(courseId);
+
+            if (existingStudent.getCourses() != null) {
+                existingStudent.getCourses().add(course);
+            } else {
+                existingStudent.setCourses(Arrays.asList(course));
+            }
+
             studentDao.update(existingStudent);
             LOG.info("Student object updated: {}", existingStudent);
         }
@@ -166,6 +179,12 @@ public class StudentServlet extends HttpServlet {
         Long addressId = Long.valueOf(addressIdStr);
         Address address = addressDao.findById(addressId);
         p.setAddress(address);
+
+        String courseIdStr = req.getParameter("courseid");
+        Long courseId = Long.valueOf(courseIdStr);
+        Course course = courseDao.findById(courseId);
+
+        p.setCourses(Arrays.asList(course));
 
         studentDao.save(p);
         LOG.info("Saved a new Student object: {}", p);
