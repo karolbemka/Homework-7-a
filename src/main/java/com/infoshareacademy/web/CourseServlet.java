@@ -2,6 +2,7 @@ package com.infoshareacademy.web;
 
 import com.infoshareacademy.dao.CourseDao;
 import com.infoshareacademy.model.Course;
+import com.infoshareacademy.model.CourseSummary;
 import java.io.IOException;
 import java.util.List;
 import javax.inject.Inject;
@@ -41,6 +42,11 @@ public class CourseServlet extends HttpServlet {
             deleteCourse(req, resp);
         } else if (action.equals("update")) {
             updateCourse(req, resp);
+        } else if (action.equals("summary")) {
+            List<CourseSummary> courses = courseDao.getCoursesDetails();
+            for (CourseSummary p : courses) {
+                resp.getWriter().write(p.toString() + "\n");
+            }
         } else {
             resp.getWriter().write("Unknown action.");
         }
