@@ -24,3 +24,8 @@ Cwiczenie 7:
 http://localhost:8080/hibernate-demo/address?action=add&city=Wejherowo&street=Prosta 12
 http://localhost:8080/hibernate-demo/computer?action=add&name=MacBook%20Air&os=OS%20X
 http://localhost:8080/hibernate-demo/student?action=add&name=Tomasz&surname=Smith&date=1988-02-28&cid=3&aid=3
+
+Cwiczenie 8:
+http://localhost:8080/hibernate-demo/course?action=findAll
+http://localhost:8080/hibernate-demo/course?action=add&course=JJDD8
+http://localhost:8080/hibernate-demo/course?action=delete&id=1

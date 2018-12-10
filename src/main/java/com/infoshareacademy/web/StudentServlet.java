@@ -2,9 +2,11 @@ package com.infoshareacademy.web;
 
 import com.infoshareacademy.dao.AddressDao;
 import com.infoshareacademy.dao.ComputerDao;
+import com.infoshareacademy.dao.CourseDao;
 import com.infoshareacademy.dao.StudentDao;
 import com.infoshareacademy.model.Address;
 import com.infoshareacademy.model.Computer;
+import com.infoshareacademy.model.Course;
 import com.infoshareacademy.model.Student;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -36,11 +38,24 @@ public class StudentServlet extends HttpServlet {
     @Inject
     private AddressDao addressDao;
 
+    @Inject
+    private CourseDao courseDao;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
         // Test data
+
+        // Courses
+        Course course1 = new Course("JJDD5");
+        courseDao.save(course1);
+
+        Course course2 = new Course("JJDZ5");
+        courseDao.save(course2);
+
+        Course course3 = new Course("JJDDL2");
+        courseDao.save(course3);
 
         // Addresses
         Address a1 = new Address("Grunwaldzka 472B", "Gdansk");
