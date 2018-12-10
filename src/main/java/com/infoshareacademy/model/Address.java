@@ -75,14 +75,17 @@ public class Address {
 
     @Override
     public String toString() {
+        List<Long> studentsIds = students
+            .stream()
+            //.map(Student::getId)
+            .map(s -> s.getId())
+            .collect(toList());
+
         final StringBuffer sb = new StringBuffer("Address{");
         sb.append("id=").append(id);
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
-        sb.append(", students=").append(students
-            .stream()
-            .map(Student::getId)
-            .collect(toList()));
+        sb.append(", students=").append(studentsIds);
         sb.append('}');
         return sb.toString();
     }
