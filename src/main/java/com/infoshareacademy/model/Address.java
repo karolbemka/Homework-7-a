@@ -1,10 +1,15 @@
 package com.infoshareacademy.model;
 
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +29,9 @@ public class Address {
     @Column(name = "city")
     @NotNull
     private String city;
+
+    @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
+    private List<Student> students;
 
     public Address() {
     }
@@ -57,12 +65,24 @@ public class Address {
         this.city = city;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Address{");
         sb.append("id=").append(id);
         sb.append(", street='").append(street).append('\'');
         sb.append(", city='").append(city).append('\'');
+        sb.append(", students=").append(students
+            .stream()
+            .map(Student::getId)
+            .collect(toList()));
         sb.append('}');
         return sb.toString();
     }

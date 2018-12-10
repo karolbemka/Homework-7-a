@@ -62,13 +62,15 @@ public class StudentServlet extends HttpServlet {
         Student student1 = new Student("Michal",
             "Malinowski",
             LocalDate.of(2000, 2, 13),
-            c1);
+            c1,
+            a1);
         studentDao.save(student1);
 
         Student student2 = new Student("Marek",
             "Kowalski",
             LocalDate.parse("2001-11-12"),
-            c2);
+            c2,
+            a1);
         studentDao.save(student2);
 
         LOG.info("System time zone is: {}", ZoneId.systemDefault());
@@ -114,6 +116,11 @@ public class StudentServlet extends HttpServlet {
             LocalDate date = LocalDate.parse(dateStr); // YYYY-MM-DD
             existingStudent.setDateOfBirth(date);
 
+            String addressIdStr = req.getParameter("aid");
+            Long addressId = Long.valueOf(addressIdStr);
+            Address address = addressDao.findById(addressId);
+            existingStudent.setAddress(address);
+
             studentDao.update(existingStudent);
             LOG.info("Student object updated: {}", existingStudent);
         }
@@ -137,6 +144,11 @@ public class StudentServlet extends HttpServlet {
         Long computerId = Long.valueOf(computerIdStr);
         Computer c = computerDao.findById(computerId);
         p.setComputer(c);
+
+        String addressIdStr = req.getParameter("aid");
+        Long addressId = Long.valueOf(addressIdStr);
+        Address address = addressDao.findById(addressId);
+        p.setAddress(address);
 
         studentDao.save(p);
         LOG.info("Saved a new Student object: {}", p);

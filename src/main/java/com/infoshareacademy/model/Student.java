@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -36,16 +38,21 @@ public class Student {
     @JoinColumn(name = "computer_id", unique = true)
     private Computer computer;
 
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
     public Student() {
 
     }
 
     public Student(String name, String surname, LocalDate dateOfBirth,
-        Computer computer) {
+        Computer computer, Address address) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.computer = computer;
+        this.address = address;
     }
 
     public Long getId() {
@@ -88,6 +95,14 @@ public class Student {
         this.computer = computer;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Student{");
@@ -96,6 +111,7 @@ public class Student {
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", dateOfBirth=").append(dateOfBirth);
         sb.append(", computer=").append(computer);
+        sb.append(", address=").append(address);
         sb.append('}');
         return sb.toString();
     }
