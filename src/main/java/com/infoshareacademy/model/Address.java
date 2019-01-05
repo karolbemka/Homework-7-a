@@ -1,5 +1,7 @@
 package com.infoshareacademy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class Address {
     @NotNull
     private String city;
 
-    @OneToMany(mappedBy = "address", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "address", fetch = FetchType.EAGER)
     private List<Student> students;
 
     public Address() {
@@ -65,6 +67,7 @@ public class Address {
         this.city = city;
     }
 
+    @JsonIgnore
     public List<Student> getStudents() {
         return students;
     }

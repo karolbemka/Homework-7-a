@@ -1,15 +1,11 @@
 package com.infoshareacademy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -25,7 +21,7 @@ public class Course {
     @NotNull
     private String name;
 
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
     private List<Student> students;
 
     public Course() {
@@ -51,6 +47,7 @@ public class Course {
         this.name = name;
     }
 
+    @JsonIgnore
     public List<Student> getStudents() {
         return students;
     }

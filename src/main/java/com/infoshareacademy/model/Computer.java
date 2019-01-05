@@ -1,5 +1,8 @@
 package com.infoshareacademy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "COMPUTERS")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Computer {
 
     @Id
@@ -41,6 +45,7 @@ public class Computer {
         this.id = id;
     }
 
+    @JsonProperty
     public String getName() {
         return name;
     }
@@ -49,6 +54,7 @@ public class Computer {
         this.name = name;
     }
 
+    @JsonProperty
     public String getOperatingSystem() {
         return operatingSystem;
     }
